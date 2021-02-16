@@ -18,14 +18,13 @@ router.get('/', function (req, res, next) {
     .then(function (data) {
       console.log(data);  //expecting array
       const ratesResponse = parser.toJson(data, {object: true});
-      const ratesValues = ratesResponse.DataSet.Body.Cube.Rate;
-      const ratesDate = ratesResponse.DataSet.Body.Cube.date;
+      const rates = ratesResponse.DataSet.Body.Cube;
       // res.render('bnrExchange', {
       //   title: "Curs de schimb valabil la data de:"
-      //   , date: ratesDate
-      //   , rates: ratesValues
+      //   , date: rates.date
+      //   , rates: rates.Rate
       // });
-      res.send(JSON.stringify(ratesValues, null, '\t'))
+      res.send(JSON.stringify(rates, null, '\t'))
     })
     .catch(function (err) {
       console.log(err);
